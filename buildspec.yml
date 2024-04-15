@@ -10,10 +10,15 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - mvn install
+      - mvn mvn clean package -DskipTests
   post_build:
     commands:
       - echo Build completed on `date`
+      - echo "Packaging application for deployment..."
+      - mv target/*.jar application.jar
+      - echo "Files included in the artifact:"
+      - ls -l
 artifacts:
   files:
-    - target/helloworld-1.0-SNAPSHOT.jar
+    - application.jar
+  discard-paths: yes
